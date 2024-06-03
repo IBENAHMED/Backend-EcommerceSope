@@ -2,13 +2,14 @@ require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(cors());
-app.use("/images", express.static('upload/images'));
+app.use("/images", express.static(path.join(__dirname, "upload/images")));
 
 // Database connection
 mongoose.connect(`${process.env.MONGO_URI}`).then(() => {

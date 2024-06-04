@@ -6,7 +6,7 @@ const Product = require("../models/Product");
 exports.uploads = (req, res) => {
     res.json({
         success: 1,
-        image_url: `https://ecommercesope.onrender.com/images/${req.file.filename}`
+        image_url: `https://backend-ecommercesope.onrender.com/images/${req.file.filename}`
     });
 };
 

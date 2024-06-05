@@ -2,16 +2,19 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const Product = require("../models/Product");
-const { uploadImageToFirebase } = require("../middleware/upload");
+
+const { ref, uploadBytes, getDownloadURL } = require("firebase/storage");
+const { storage } = require("../Firebase/firebaseConfig");
 
 exports.uploads = async (req, res) => {
-    // res.json({
-    //     success: 1,
-    //     image_url: `https://backend-ecommercesope.onrender.com/images/${req.file.location}`
-    // });
     try {
         const file = req.file;
-        const imageUrl = await uploadImageToFirebase(file);
+
+        // middlewar uploadImageToFirebase 
+        const storageRef = ref(storage, `images/${file.originalname}`);
+        const snapshot = await uploadBytes(storageRef, file.buffer);
+        const imageUrl = await getDownloadURL(snapshot.ref);
+
         res.json({
             success: 1,
             image_url: imageUrl

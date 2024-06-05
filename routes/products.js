@@ -17,7 +17,7 @@ router.get("/newcollection", newcollection);
 
 router.get("/popularWomen", popularWomen);
 
-router.get("/", (req, res) => res.json({ "message": "reda" }));
+router.get("/", (req, res) => res.json({ "message": "redass" }));
 
 router.post("/getrelatiedproducts", relatedProducts);
 

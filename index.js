@@ -9,6 +9,8 @@ const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(cors());
+
+// if there's an image named "example.jpg" in the "upload/images" directory, it can be accessed via the URL "/images/example.jpg".
 app.use("/images", express.static(path.join(__dirname, "upload/images")));
 
 // Database connection

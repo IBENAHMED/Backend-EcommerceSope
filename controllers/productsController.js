@@ -2,12 +2,23 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const Product = require("../models/Product");
+const { uploadImageToFirebase } = require("../middleware/upload");
 
-exports.uploads = (req, res) => {
-    res.json({
-        success: 1,
-        image_url: `https://backend-ecommercesope.onrender.com/images/${req.file.filename}`
-    });
+exports.uploads = async (req, res) => {
+    // res.json({
+    //     success: 1,
+    //     image_url: `https://backend-ecommercesope.onrender.com/images/${req.file.location}`
+    // });
+    try {
+        const file = req.file;
+        const imageUrl = await uploadImageToFirebase(file);
+        res.json({
+            success: 1,
+            image_url: imageUrl
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 };
 
 exports.addproducts = async (req, res) => {

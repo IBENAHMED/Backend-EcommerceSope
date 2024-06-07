@@ -2,13 +2,14 @@ const express = require("express");
 const { removeProduct, uploads, relatedProducts, getallproducts, newcollection, popularWomen, addproducts } = require("../controllers/productsController");
 const authorize = require("../middleware/authorize");
 const { upload } = require("../middleware/upload");
+const { roles } = require("../middleware/role");
 const router = express.Router();
 
-router.post("/upload", upload.single("product"), uploads)
+router.post("/upload", upload.single("product"), roles("ADMIN"), uploads)
 
-router.post("/addproducts", addproducts);
+router.post("/addproducts", roles("ADMIN"), addproducts);
 
-router.post("/removeProduct", removeProduct);
+router.post("/removeProduct", roles("ADMIN"), removeProduct);
 
 router.get("/getallproducts", getallproducts);
 

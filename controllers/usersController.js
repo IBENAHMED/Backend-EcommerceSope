@@ -29,7 +29,7 @@ exports.signup = async (req, res) => {
                 process.env.SECRET,
                 { expiresIn: '30m' }
             );
-            res.json({ token });
+            res.json({ token, id: user._id, role: user.role });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "Failed to sign up user" });
@@ -58,7 +58,7 @@ exports.login = async (req, res) => {
                 process.env.SECRET,
                 { expiresIn: '30m' }
             );
-            res.json({ token, id: user._id });
+            res.json({ token, id: user._id, role: user.role });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "Failed to login user" });

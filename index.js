@@ -27,6 +27,7 @@ const userRoutes = require("./routes/users");
 app.use('/', productRoutes);
 app.use('/', userRoutes);
 
+
 app.listen(PORT, (err) => {
     if (err) {
         console.error(`Error: ${err}`);

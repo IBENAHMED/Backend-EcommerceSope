@@ -4,7 +4,6 @@ const authorize = require("../middleware/authorize");
 const { upload } = require("../middleware/upload");
 const router = express.Router();
 
-
 router.post("/upload", upload.single("product"), uploads)
 
 router.post("/addproducts", addproducts);
@@ -17,7 +16,7 @@ router.get("/newcollection", newcollection);
 
 router.get("/popularWomen", popularWomen);
 
-router.get("/", (req, res) => res.json({ "message": "redass" }));
+// router.get("/", (req, res) => res.json({ "message": "redass" }));
 
 router.post("/getrelatiedproducts", relatedProducts);
 

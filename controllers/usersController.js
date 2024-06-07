@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Product = require("../models/Product");
+const stripe = require('stripe')(process.env.SECRET_KEY_STRIPE);
 
 
 exports.signup = async (req, res) => {
@@ -99,4 +100,34 @@ exports.UserListCartDate = async (req, res) => {
         console.error(err);
         res.status(500).json({ error: "Failed to retrieve cart data" });
     }
+};
+
+exports.charge = async (req, res) => {
+    const { products, token } = req.body;
+
+    let customer = await stripe.customers
+        .create({
+            email: token.email,
+            source: token.id
+        });
+
+    // multiple asynchronous operations
+    let invoiceItems = await Promise.all(products.map(async (p) => {
+        return await stripe.invoiceItems.create({
+            customer: customer.id, // Use the ID of the newly created customer
+            amount: p.new_price * p.Qnt * 100, // $25
+            currency: 'usd',
+            description: `Your Product ${p.name}`,
+        })
+    }))
+
+    let invoices = await Promise.all(invoiceItems.map(async (i) => {
+        return await stripe.invoices.create({
+            collection_method: 'send_invoice',
+            customer: i.customer,
+            due_date: Math.floor(Date.now() / 1000) + (24 * 60 * 60), // Due date 24 hours from now
+        });
+    }))
+
+    res.json({ invoices })
 };

@@ -2,7 +2,7 @@
 const multer = require("multer");
 
 // When using memoryStorage(), uploaded files are stored as buffers in memory instead of being saved to disk
-const storageConfig = multer.memoryStorage();         
+const storageConfig = multer.memoryStorage();
 const upload = multer({ storage: storageConfig });
 
 module.exports = { upload };

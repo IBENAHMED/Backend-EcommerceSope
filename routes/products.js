@@ -5,7 +5,7 @@ const { upload } = require("../middleware/upload");
 const roles = require("../middleware/role");
 const router = express.Router();
 
-router.post("/upload", authorize, upload.single("product"), roles("ADMIN"), uploads)
+router.post("/upload", upload.single("product"), uploads)
 
 router.post("/addproducts", authorize, roles("ADMIN"), addproducts);
 

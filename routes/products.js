@@ -1,5 +1,12 @@
 const express = require("express");
-const { removeProduct, uploads, relatedProducts, getallproducts, newcollection, popularWomen, addproducts } = require("../controllers/productsController");
+
+const { removeProduct,
+    uploads, relatedProducts, getallproducts,
+    newcollection, popularWomen, addproducts,
+    getallproductswithpagination
+
+} = require("../controllers/productsController");
+
 const authorize = require("../middleware/authorize");
 const { upload } = require("../middleware/upload");
 const roles = require("../middleware/role");
@@ -13,11 +20,11 @@ router.post("/removeProduct", authorize, roles("ADMIN"), removeProduct);
 
 router.get("/getallproducts", getallproducts);
 
+router.post("/getallproductswithpagination/:page", getallproductswithpagination);
+
 router.get("/newcollection", newcollection);
 
 router.get("/popularWomen", popularWomen);
-
-// router.get("/", (req, res) => res.json({ "message": "redass" }));
 
 router.post("/getrelatiedproducts", relatedProducts);
 

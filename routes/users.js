@@ -13,6 +13,6 @@ router.post("/userRemovePoduct", authorize, userRemovePoduct);
 
 router.post("/UserListCartDate", authorize, UserListCartDate);
 
-router.post('/charge', authorize, charge)
+router.post('/charge', authorize, charge);
 
 module.exports = router;

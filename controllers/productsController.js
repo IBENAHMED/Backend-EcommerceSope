@@ -1,6 +1,3 @@
-const express = require("express");
-const multer = require("multer");
-const path = require("path");
 const Product = require("../models/Product");
 
 const { ref, uploadBytes, getDownloadURL } = require("firebase/storage");
@@ -85,4 +82,20 @@ exports.relatedProducts = async (req, res) => {
     let product = await Product.find({ category: category });
     let fourProducts = product.slice(0, 4);
     res.json({ fourProducts })
+}
+
+exports.getallproductswithpagination = async (req, res) => {
+
+    let { page } = req.params;
+    let products = await Product.find({});
+
+    let sizePage = 10;
+    let numberPages = Math.ceil(products.length / sizePage);
+
+    let start = (page - 1) * sizePage;
+    let limit = start + sizePage;
+
+    let productPage = (await Product.find({})).slice(start, limit);
+
+    res.json({ productPage, numberPages })
 }

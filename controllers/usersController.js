@@ -25,8 +25,7 @@ exports.signup = async (req, res) => {
 
             const token = jwt.sign(
                 { id: user._id, role: user.role },
-                process.env.SECRET,
-                { expiresIn: '30m' }
+                process.env.SECRET
             );
             res.json({ token, id: user._id, role: user.role });
         } catch (err) {
@@ -54,8 +53,7 @@ exports.login = async (req, res) => {
 
             const token = jwt.sign(
                 { id: user._id, role: user.role },
-                process.env.SECRET,
-                { expiresIn: '30m' }
+                process.env.SECRET
             );
             res.json({ token, id: user._id, role: user.role });
         } catch (err) {

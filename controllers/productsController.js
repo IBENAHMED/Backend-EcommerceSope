@@ -99,3 +99,19 @@ exports.getallproductswithpagination = async (req, res) => {
 
     res.json({ productPage, numberPages })
 }
+
+// exports.updateProduct = async (req, res) => {
+
+//     let { id, title, old_price	New Price	Category } = req.body;
+//     let products = await Product.find({});
+
+//     let sizePage = 10;
+//     let numberPages = Math.ceil(products.length / sizePage);
+
+//     let start = (page - 1) * sizePage;
+//     let limit = start + sizePage;
+
+//     let productPage = (await Product.find({})).slice(start, limit);
+
+//     res.json({ productPage, numberPages })
+// }

@@ -18,6 +18,8 @@ router.post("/addproducts", authorize, roles("ADMIN"), addproducts);
 
 router.post("/removeProduct", authorize, roles("ADMIN"), removeProduct);
 
+// router.post("/removeProduct", authorize, roles("ADMIN"), updateProduct);
+
 router.get("/getallproducts", getallproducts);
 
 router.post("/getallproductswithpagination/:page", getallproductswithpagination);

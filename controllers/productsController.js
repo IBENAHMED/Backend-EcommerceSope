@@ -22,9 +22,9 @@ exports.uploads = async (req, res) => {
 };
 
 exports.addproducts = async (req, res) => {
-    const { name, img, category, new_price, old_price, date, available } = req.body;
+    const { name, img, category, new_price, old_price, size, date, available } = req.body;
     try {
-        const newProduct = new Product({ name, img, category, new_price, old_price, date, available });
+        const newProduct = new Product({ name, img, category, new_price, old_price, size, date, available });
         await newProduct.save();
         res.json(newProduct);
     } catch (err) {

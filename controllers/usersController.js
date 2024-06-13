@@ -67,9 +67,24 @@ exports.login = async (req, res) => {
 
 exports.userAddPoduct = async (req, res) => {
     try {
-        await User.updateOne({ _id: req.user.id }, { $inc: { [`cartData.${req.body.id}`]: 1 } });
-        const user = await User.findById(req.user.id);
-        res.json(user.cartData);
+        const Products = await Product.findOne({ _id: req.body.id });
+        let ProductSize = Products.size;
+        let isavilable = false;
+
+        ProductSize.map(async (e) => {
+            if (req.body.size == e) {
+                isavilable = true;
+            }
+        })
+
+        if (isavilable) {
+            await User.updateOne({ _id: req.user.id }, { $inc: { [`cartData.${req.body.id}`]: 1 } });
+            const user = await User.findById(req.user.id);
+            return res.json(user.cartData);
+        } else {
+            return res.status(403).json({ message: "this size not exsist" })
+        }
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to add product to cart" });

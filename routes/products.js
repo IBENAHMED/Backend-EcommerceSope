@@ -14,8 +14,7 @@ const router = express.Router();
 
 router.post("/upload", upload.single("product"), uploads)
 
-// router.post("/addproducts", authorize, roles("ADMIN"), addproducts);
-router.post("/addproducts", addproducts);
+router.post("/addproducts", authorize, roles("ADMIN"), addproducts);
 
 router.post("/removeProduct", authorize, roles("ADMIN"), removeProduct);
 

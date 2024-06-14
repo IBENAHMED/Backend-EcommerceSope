@@ -82,7 +82,7 @@ exports.relatedProducts = async (req, res) => {
     let product = await Product.find({ category: category });
     let fourProducts = product.slice(0, 4);
     res.json({ fourProducts })
-}
+};
 
 exports.getallproductswithpagination = async (req, res) => {
 
@@ -98,20 +98,24 @@ exports.getallproductswithpagination = async (req, res) => {
     let productPage = (await Product.find({})).slice(start, limit);
 
     res.json({ productPage, numberPages })
-}
+};
 
-// exports.updateProduct = async (req, res) => {
+exports.lowtohigh = async (req, res) => {
+    try {
+        let products = (await Product.find({}).sort({ new_price: 1 })).slice(0, 8);
 
-//     let { id, title, old_price	New Price	Category } = req.body;
-//     let products = await Product.find({});
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", error: error.message });
+    }
+};
 
-//     let sizePage = 10;
-//     let numberPages = Math.ceil(products.length / sizePage);
+exports.Hightolow = async (req, res) => {
+    try {
+        let products = (await Product.find({}).sort({ new_price: -1 })).slice(0, 8);
 
-//     let start = (page - 1) * sizePage;
-//     let limit = start + sizePage;
-
-//     let productPage = (await Product.find({})).slice(start, limit);
-
-//     res.json({ productPage, numberPages })
-// }
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", error: error.message });
+    }
+};

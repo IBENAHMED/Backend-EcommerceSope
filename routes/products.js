@@ -3,7 +3,7 @@ const express = require("express");
 const { removeProduct,
     uploads, relatedProducts, getallproducts,
     newcollection, popularWomen, addproducts,
-    getallproductswithpagination
+    getallproductswithpagination, lowtohigh, Hightolow
 
 } = require("../controllers/productsController");
 
@@ -18,8 +18,6 @@ router.post("/addproducts", authorize, roles("ADMIN"), addproducts);
 
 router.post("/removeProduct", authorize, roles("ADMIN"), removeProduct);
 
-// router.post("/removeProduct", authorize, roles("ADMIN"), updateProduct);
-
 router.get("/getallproducts", getallproducts);
 
 router.post("/getallproductswithpagination/:page", getallproductswithpagination);
@@ -29,5 +27,9 @@ router.get("/newcollection", newcollection);
 router.get("/popularWomen", popularWomen);
 
 router.post("/getrelatiedproducts", relatedProducts);
+
+router.get("/lowtohigh", lowtohigh);
+
+router.get("/Hightolow", Hightolow);
 
 module.exports = router;

@@ -128,7 +128,7 @@ exports.charge = async (req, res) => {
         return await stripe.invoiceItems.create({
             customer: customer.id, // Use the ID of the newly created customer
             amount: p.new_price * p.Qnt * 100, // $25
-            qty: p.Qnt,
+            qty: `${p.Qnt}`,
             currency: 'usd',
             description: `Your Product ${p.name}`,
         })

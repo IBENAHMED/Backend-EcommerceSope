@@ -1,13 +1,11 @@
 const express = require("express");
-const { signup, login, userAddPoduct, userRemovePoduct, UserListCartDate, charge } = require("../controllers/usersController");
+const { signup, login, userAddPoduct, userRemovePoduct, UserListCartDate, charge, test } = require("../controllers/usersController");
 const authorize = require("../middleware/authorize");
 const router = express.Router();
 
 router.post("/signup", signup);
 
-app.get("/api/test", (req, res) => {
-  res.json({message: "API is working"});
-});
+router.get("/api/test", test);
 
 router.post("/login", login);
 

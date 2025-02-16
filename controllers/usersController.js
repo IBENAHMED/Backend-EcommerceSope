@@ -38,7 +38,7 @@ exports.signup = async (req, res) => {
 };
 
 exports.test = (req, res) => {
-    res.json({message: "API is working"});
+    res.json({message: "API is workingsss"});
 };
 
 exports.login = async (req, res) => {

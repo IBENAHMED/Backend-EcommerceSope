@@ -5,8 +5,6 @@ const router = express.Router();
 
 router.post("/signup", signup);
 
-router.get("/api/test", test);
-
 router.post("/login", login);
 
 router.post("/userAddPoduct", authorize, userAddPoduct);

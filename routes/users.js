@@ -3,7 +3,11 @@ const { signup, login, userAddPoduct, userRemovePoduct, UserListCartDate, charge
 const authorize = require("../middleware/authorize");
 const router = express.Router();
 
-router.post("/signup", signup)
+router.post("/signup", signup);
+
+app.get("/api/test", (req, res) => {
+  res.json({message: "API is working"});
+});
 
 router.post("/login", login);
 

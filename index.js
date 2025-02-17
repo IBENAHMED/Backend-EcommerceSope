@@ -1,40 +1,41 @@
-require('dotenv').config();
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const path = require("path");
+require("dotenv").config()
+const express = require("express")
+const cors = require("cors")
+const mongoose = require("mongoose")
+const path = require("path")
 
-const app = express();
-const PORT = process.env.PORT;
+const app = express()
+const PORT = process.env.PORT
 
-app.use(express.json());
-app.use(cors({
+app.use(express.json())
+app.use(
+  cors({
     origin: "http://localhost:3005",
     credentials: true,
-}));
+  }),
+)
 
-// if there's an image named "example.jpg" in the "upload/images" directory, it can be accessed via the URL "/images/example.jpg".
-app.use("/images", express.static(path.join(__dirname, "upload/images")));
+app.use("/images", express.static(path.join(__dirname, "upload/images")))
 
-// Database connection
-mongoose.connect(`${process.env.MONGO_URI}`).then(() => {
-    console.log("Database connected");
-}).catch((err) => {
-    console.error("Database connection error:", err);
-});
+mongoose
+  .connect(`${process.env.MONGO_URI}`)
+  .then(() => {
+    console.log("Database connected")
+  })
+  .catch((err) => {
+    console.error("Database connection error:", err)
+  })
 
-// Routes
-const productRoutes = require("./routes/products");
-const userRoutes = require("./routes/users");
+const productRoutes = require("./routes/products")
+const userRoutes = require("./routes/users")
 
-app.use('/', productRoutes);
-app.use('/', userRoutes);
-
+app.use("/", productRoutes)
+app.use("/", userRoutes)
 
 app.listen(PORT, (err) => {
-    if (err) {
-        console.error(`Error: ${err}`);
-    } else {
-        console.log(`Server running on port ${PORT}`);
-    }
-});
+  if (err) {
+    console.error(`Error: ${err}`)
+  } else {
+    console.log(`Server running on port ${PORT}`)
+  }
+})

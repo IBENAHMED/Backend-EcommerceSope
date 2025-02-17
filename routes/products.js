@@ -1,35 +1,30 @@
-const express = require("express");
+const express = require("express")
 
-const { removeProduct,
-    uploads, relatedProducts, getallproducts,
-    newcollection, popularWomen, addproducts,
-    getallproductswithpagination, lowtohigh, Hightolow
+const {removeProduct, uploads, relatedProducts, getallproducts, newcollection, popularWomen, addproducts, getallproductswithpagination, lowtohigh, Hightolow} = require("../controllers/productsController")
 
-} = require("../controllers/productsController");
-
-const authorize = require("../middleware/authorize");
-const { upload } = require("../middleware/upload");
-const roles = require("../middleware/role");
-const router = express.Router();
+const authorize = require("../middleware/authorize")
+const {upload} = require("../middleware/upload")
+const roles = require("../middleware/role")
+const router = express.Router()
 
 router.post("/upload", upload.single("product"), uploads)
 
-router.post("/addproducts", authorize, roles("ADMIN"), addproducts);
+router.post("/addproducts", authorize, roles("ADMIN"), addproducts)
 
-router.post("/removeProduct", authorize, roles("ADMIN"), removeProduct);
+router.post("/removeProduct", authorize, roles("ADMIN"), removeProduct)
 
-router.get("/getallproducts", getallproducts);
+router.get("/getallproducts", getallproducts)
 
-router.post("/getallproductswithpagination/:page", getallproductswithpagination);
+router.post("/getallproductswithpagination/:page", getallproductswithpagination)
 
-router.get("/newcollection", newcollection);
+router.get("/newcollection", newcollection)
 
-router.get("/popularWomen", popularWomen);
+router.get("/popularWomen", popularWomen)
 
-router.post("/getrelatiedproducts", relatedProducts);
+router.post("/getrelatiedproducts", relatedProducts)
 
-router.get("/lowtohigh", lowtohigh);
+router.get("/lowtohigh", lowtohigh)
 
-router.get("/Hightolow", Hightolow);
+router.get("/Hightolow", Hightolow)
 
-module.exports = router;
+module.exports = router
